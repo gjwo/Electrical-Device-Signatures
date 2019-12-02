@@ -1,0 +1,6 @@
+(WashingMachine: 
+    (Valve:[2W for 20mS]) ->
+    (Pump:[100W for 2M]) ->
+    (Heater:[1kW for 10M]) ->
+    (Motor:[500W, 200W for 20M])
+)

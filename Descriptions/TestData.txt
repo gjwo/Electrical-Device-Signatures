@@ -1,0 +1,7 @@
+(LEDBulb11w: [11W for var])
+(WashingMachine: 
+    (Valve:[2W for 20mS]) ->
+    (Pump:[100W for (10s to 2M)]) ->
+    (Heater:[1kW for (2M to 10M)]) ->
+    (Motor:[500W, -200W for (5M to 20M)])
+)
