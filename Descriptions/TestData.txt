@@ -1,4 +1,4 @@
-Start: 2 Dec 2019
+Start: 02 Dec 2019
 Timebase: 1s
 (LEDBulb11w: [11W for var])
 (WashingMachine:

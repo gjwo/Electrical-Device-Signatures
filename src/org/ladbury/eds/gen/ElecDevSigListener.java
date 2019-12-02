@@ -1,6 +1,5 @@
-package org.ladbury.eds.gen;// Generated from C:/Users/graha/Development/Electrical_Device_Signatures/Grammars\ElecDevSig.g4 by ANTLR 4.7.2
-
 // Generated from C:/Users/graha/Development/Electrical_Device_Signatures/Grammars\ElecDevSig.g4 by ANTLR 4.7.2
+package org.ladbury.eds.gen;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**

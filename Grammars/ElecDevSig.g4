@@ -9,7 +9,7 @@ import datetime;
  * Parser Rules
  */
 init                : startdate? timebase? signatures;
-startdate           : START date_time ;
+startdate           : STARTDATE date_time;
 timebase            : TIMEBASE time_interval;
 signatures			: device_signature+; 
 device_signature	: '('NAME ':' energy_signature (THEN energy_signature)* ')'
@@ -37,8 +37,8 @@ INTEGER			: DIGIT+;
 SIGN 			: PLUS | MINUS;
 POWER_UNIT 		: WATT | KILOWATT;
 TIME_UNIT 		: MILLISECOND | SECOND | MINUTE | HOUR;
-TIMEBASE        : 'Timebase: ';
-START           : 'Start: ';
+TIMEBASE        : 'Timebase:';
+STARTDATE       : 'Start:';
 TO              : 'to';
 VARIABLE        : 'var';
 THEN            : '->';
@@ -53,6 +53,5 @@ HOUR            : 'H' | 'h';
 NAME			: LETTER (LETTER | DIGIT)*;
 fragment LCASE	: [a-z];
 fragment UCASE	: [A-Z];
-fragment DIGIT	: [0-9];
 fragment LETTER	: (LCASE | UCASE);
 WS				: [ \r\t\n]+ 		-> skip;

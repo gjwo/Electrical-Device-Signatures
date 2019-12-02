@@ -9,6 +9,7 @@ public class Main {
 	// write your code here
         // create a CharStream that reads from standard input
         //ANTLRInputStream input = new ANTLRInputStream(System.in);
+        System.out.print("Input file: ");
         System.out.println(args[0]);
         CharStream input = CharStreams.fromFileName(args[0]);
         // create a lexer that feeds off of input CharStream

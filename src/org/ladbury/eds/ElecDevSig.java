@@ -16,9 +16,18 @@ public class ElecDevSig extends ElecDevSigBaseListener
         System.out.println(ctx.toString());
     }
     @Override public void enterDevice_signature(ElecDevSigParser.Device_signatureContext ctx) {
-        System.out.println("Enter Device ");
+        System.out.print("Enter Device ");
         System.out.println(ctx.toStringTree());
     }
+    @Override public void enterStartdate(ElecDevSigParser.StartdateContext ctx) {
+        System.out.print("Enter Startdate ");
+        System.out.println(ctx.toStringTree());
+    }
+    @Override public void enterTimebase(ElecDevSigParser.TimebaseContext ctx) {
+        System.out.print("Enter Timebase ");
+        System.out.println(ctx.toStringTree());
+    }
+
 //    @Override public void exitDevice_signature(ElecDevSigParser.Device_signatureContext ctx) {
 //        System.out.println("Exit Device ");
 //        System.out.println(ctx.toStringTree());

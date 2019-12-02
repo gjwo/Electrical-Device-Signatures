@@ -29,7 +29,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 grammar datetime;
 
 date_time
-   : (day ',')? date time
+   : (day ',')? date time?
    ;
 
 day
@@ -43,7 +43,7 @@ day
    ;
 
 date
-   : two_digit + month two_digit
+   : two_digit month (two_digit | four_digit)
    ;
 
 month
@@ -62,7 +62,7 @@ month
    ;
 
 time
-   : hour zone
+   : hour zone?
    ;
 
 hour
@@ -85,11 +85,11 @@ zone
    ;
 
 two_digit
-   : alphanumeric alphanumeric
+   : DIGIT DIGIT
    ;
 
 four_digit
-   : alphanumeric alphanumeric alphanumeric alphanumeric
+   : DIGIT DIGIT DIGIT DIGIT
    ;
 
 alphanumeric
