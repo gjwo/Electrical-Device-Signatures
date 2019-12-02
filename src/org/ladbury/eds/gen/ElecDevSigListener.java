@@ -1,3 +1,5 @@
+package org.ladbury.eds.gen;// Generated from C:/Users/graha/Development/Electrical_Device_Signatures/Grammars\ElecDevSig.g4 by ANTLR 4.7.2
+
 // Generated from C:/Users/graha/Development/Electrical_Device_Signatures/Grammars\ElecDevSig.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -6,6 +8,36 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  * {@link ElecDevSigParser}.
  */
 public interface ElecDevSigListener extends ParseTreeListener {
+	/**
+	 * Enter a parse tree produced by {@link ElecDevSigParser#init}.
+	 * @param ctx the parse tree
+	 */
+	void enterInit(ElecDevSigParser.InitContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ElecDevSigParser#init}.
+	 * @param ctx the parse tree
+	 */
+	void exitInit(ElecDevSigParser.InitContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ElecDevSigParser#startdate}.
+	 * @param ctx the parse tree
+	 */
+	void enterStartdate(ElecDevSigParser.StartdateContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ElecDevSigParser#startdate}.
+	 * @param ctx the parse tree
+	 */
+	void exitStartdate(ElecDevSigParser.StartdateContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ElecDevSigParser#timebase}.
+	 * @param ctx the parse tree
+	 */
+	void enterTimebase(ElecDevSigParser.TimebaseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ElecDevSigParser#timebase}.
+	 * @param ctx the parse tree
+	 */
+	void exitTimebase(ElecDevSigParser.TimebaseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ElecDevSigParser#signatures}.
 	 * @param ctx the parse tree
@@ -117,13 +149,113 @@ public interface ElecDevSigListener extends ParseTreeListener {
 	 */
 	void exitMax_time(ElecDevSigParser.Max_timeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ElecDevSigParser#elapsed_time}.
+	 * Enter a parse tree produced by {@link ElecDevSigParser#time_interval}.
 	 * @param ctx the parse tree
 	 */
-	void enterElapsed_time(ElecDevSigParser.Elapsed_timeContext ctx);
+	void enterTime_interval(ElecDevSigParser.Time_intervalContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ElecDevSigParser#elapsed_time}.
+	 * Exit a parse tree produced by {@link ElecDevSigParser#time_interval}.
 	 * @param ctx the parse tree
 	 */
-	void exitElapsed_time(ElecDevSigParser.Elapsed_timeContext ctx);
+	void exitTime_interval(ElecDevSigParser.Time_intervalContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ElecDevSigParser#date_time}.
+	 * @param ctx the parse tree
+	 */
+	void enterDate_time(ElecDevSigParser.Date_timeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ElecDevSigParser#date_time}.
+	 * @param ctx the parse tree
+	 */
+	void exitDate_time(ElecDevSigParser.Date_timeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ElecDevSigParser#day}.
+	 * @param ctx the parse tree
+	 */
+	void enterDay(ElecDevSigParser.DayContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ElecDevSigParser#day}.
+	 * @param ctx the parse tree
+	 */
+	void exitDay(ElecDevSigParser.DayContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ElecDevSigParser#date}.
+	 * @param ctx the parse tree
+	 */
+	void enterDate(ElecDevSigParser.DateContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ElecDevSigParser#date}.
+	 * @param ctx the parse tree
+	 */
+	void exitDate(ElecDevSigParser.DateContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ElecDevSigParser#month}.
+	 * @param ctx the parse tree
+	 */
+	void enterMonth(ElecDevSigParser.MonthContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ElecDevSigParser#month}.
+	 * @param ctx the parse tree
+	 */
+	void exitMonth(ElecDevSigParser.MonthContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ElecDevSigParser#time}.
+	 * @param ctx the parse tree
+	 */
+	void enterTime(ElecDevSigParser.TimeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ElecDevSigParser#time}.
+	 * @param ctx the parse tree
+	 */
+	void exitTime(ElecDevSigParser.TimeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ElecDevSigParser#hour}.
+	 * @param ctx the parse tree
+	 */
+	void enterHour(ElecDevSigParser.HourContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ElecDevSigParser#hour}.
+	 * @param ctx the parse tree
+	 */
+	void exitHour(ElecDevSigParser.HourContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ElecDevSigParser#zone}.
+	 * @param ctx the parse tree
+	 */
+	void enterZone(ElecDevSigParser.ZoneContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ElecDevSigParser#zone}.
+	 * @param ctx the parse tree
+	 */
+	void exitZone(ElecDevSigParser.ZoneContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ElecDevSigParser#two_digit}.
+	 * @param ctx the parse tree
+	 */
+	void enterTwo_digit(ElecDevSigParser.Two_digitContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ElecDevSigParser#two_digit}.
+	 * @param ctx the parse tree
+	 */
+	void exitTwo_digit(ElecDevSigParser.Two_digitContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ElecDevSigParser#four_digit}.
+	 * @param ctx the parse tree
+	 */
+	void enterFour_digit(ElecDevSigParser.Four_digitContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ElecDevSigParser#four_digit}.
+	 * @param ctx the parse tree
+	 */
+	void exitFour_digit(ElecDevSigParser.Four_digitContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ElecDevSigParser#alphanumeric}.
+	 * @param ctx the parse tree
+	 */
+	void enterAlphanumeric(ElecDevSigParser.AlphanumericContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ElecDevSigParser#alphanumeric}.
+	 * @param ctx the parse tree
+	 */
+	void exitAlphanumeric(ElecDevSigParser.AlphanumericContext ctx);
 }
