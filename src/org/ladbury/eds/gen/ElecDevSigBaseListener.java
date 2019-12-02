@@ -196,30 +196,6 @@ public class ElecDevSigBaseListener implements ElecDevSigListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDate_time(ElecDevSigParser.Date_timeContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDate_time(ElecDevSigParser.Date_timeContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterDay(ElecDevSigParser.DayContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDay(ElecDevSigParser.DayContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterDate(ElecDevSigParser.DateContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -232,85 +208,13 @@ public class ElecDevSigBaseListener implements ElecDevSigListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMonth(ElecDevSigParser.MonthContext ctx) { }
+	@Override public void enterTime_of_day(ElecDevSigParser.Time_of_dayContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMonth(ElecDevSigParser.MonthContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterTime(ElecDevSigParser.TimeContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTime(ElecDevSigParser.TimeContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterHour(ElecDevSigParser.HourContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitHour(ElecDevSigParser.HourContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterZone(ElecDevSigParser.ZoneContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitZone(ElecDevSigParser.ZoneContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterTwo_digit(ElecDevSigParser.Two_digitContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTwo_digit(ElecDevSigParser.Two_digitContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterFour_digit(ElecDevSigParser.Four_digitContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFour_digit(ElecDevSigParser.Four_digitContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterAlphanumeric(ElecDevSigParser.AlphanumericContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAlphanumeric(ElecDevSigParser.AlphanumericContext ctx) { }
+	@Override public void exitTime_of_day(ElecDevSigParser.Time_of_dayContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
