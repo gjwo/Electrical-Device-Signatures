@@ -1,5 +1,7 @@
+Start: 2 Dec 2019
+Timebase: 1s
 (LEDBulb11w: [11W for var])
-(WashingMachine: 
+(WashingMachine:
     (Valve:[2W for 20mS]) ->
     (Pump:[100W for (10s to 2M)]) ->
     (Heater:[1kW for (2M to 10M)]) ->

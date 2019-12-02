@@ -9,14 +9,15 @@ public class Main {
 	// write your code here
         // create a CharStream that reads from standard input
         //ANTLRInputStream input = new ANTLRInputStream(System.in);
-        CharStream input = CharStreams.fromFileName("myfile.testlang");
+        System.out.println(args[0]);
+        CharStream input = CharStreams.fromFileName(args[0]);
         // create a lexer that feeds off of input CharStream
         ElecDevSigLexer lexer = new ElecDevSigLexer(input);
         // create a buffer of tokens pulled from the lexer
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         // create a parser that feeds off the tokens buffer
         ElecDevSigParser parser = new ElecDevSigParser(tokens);
-        ParseTree tree = parser.signatures(); // begin parsing at init rule
+        ParseTree tree = parser.init(); // begin parsing at init rule
         // Create a generic parse tree walker that can trigger callbacks
         ParseTreeWalker walker = new ParseTreeWalker();
         // Walk the tree created during the parse, trigger callbacks
