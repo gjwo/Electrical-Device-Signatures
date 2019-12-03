@@ -1,13 +1,15 @@
 lexer grammar LexCommon;
 
-NAME			: ALPHA (ALPHA | DIGIT)*;
-
-REAL_NUMBER		: SIGN? INTEGER ( DOT DIGIT+)?;
-SIGNED_INT 		: SIGN? DIGIT+;
-INTEGER			: DIGIT+;
 DIGITS2         : DIGIT DIGIT;
 DIGITS4         : DIGIT DIGIT DIGIT DIGIT;
-SIGN 			: PLUS | MINUS;
+REAL_NUMBER		: INT? DECIMAL ;
+WHOLE_NUMBER    : INT;
+
+fragment DECIMAL        : DOT UNSIGNED_INT;
+fragment INT            : (DIGITS2 | DIGITS4 | UNSIGNED_INT | SIGNED_INT);
+fragment SIGNED_INT 	: SIGN UNSIGNED_INT;
+fragment UNSIGNED_INT	: DIGIT+;
+fragment SIGN 	        : PLUS | MINUS;
 
 DAYOFWEEK       : 'Mon'
                 | 'Tue'
@@ -30,6 +32,7 @@ MONTH           : 'Jan'
                 | 'Nov'
                 | 'Dec'
 ;
+NAME			: ALPHA (ALPHA | DIGIT)*;
 
 PLUS            : '+';
 MINUS           : '-';

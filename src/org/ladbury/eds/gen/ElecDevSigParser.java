@@ -19,21 +19,22 @@ public class ElecDevSigParser extends Parser {
 	public static final int
 		FOR=1, POWER_UNIT=2, TIME_UNIT=3, TIMEBASE=4, STARTDATE=5, TO=6, VARIABLE=7, 
 		THEN=8, WATT=9, KILOWATT=10, MILLISECOND=11, SECOND=12, MINUTE=13, HOUR=14, 
-		NAME=15, REAL_NUMBER=16, SIGNED_INT=17, INTEGER=18, DIGITS2=19, DIGITS4=20, 
-		SIGN=21, ALPHANUMERIC=22, DAYOFWEEK=23, MONTH=24, PLUS=25, MINUS=26, LBRACE=27, 
-		RBRACE=28, LBRACKET=29, RBRACKET=30, LCURLY=31, RCURLY=32, COMMA=33, COLON=34, 
-		SEMICOLON=35, DOT=36, COMMENT=37, ML_COMMENT=38, WS=39;
+		DIGITS2=15, DIGITS4=16, REAL_NUMBER=17, WHOLE_NUMBER=18, DAYOFWEEK=19, 
+		MONTH=20, NAME=21, PLUS=22, MINUS=23, LBRACE=24, RBRACE=25, LBRACKET=26, 
+		RBRACKET=27, LCURLY=28, RCURLY=29, COMMA=30, COLON=31, SEMICOLON=32, DOT=33, 
+		COMMENT=34, ML_COMMENT=35, WS=36;
 	public static final int
-		RULE_init = 0, RULE_startdate = 1, RULE_timebase = 2, RULE_signatures = 3, 
-		RULE_device_signature = 4, RULE_energy_signature = 5, RULE_consumption_block = 6, 
-		RULE_real_power = 7, RULE_reactive_power = 8, RULE_power = 9, RULE_time_period = 10, 
-		RULE_range = 11, RULE_min_time = 12, RULE_max_time = 13, RULE_time_interval = 14, 
-		RULE_date = 15, RULE_time_of_day = 16;
+		RULE_init = 0, RULE_startdate = 1, RULE_timebase = 2, RULE_date = 3, RULE_time_of_day = 4, 
+		RULE_signatures = 5, RULE_device_signature = 6, RULE_energy_signature = 7, 
+		RULE_consumption_block = 8, RULE_real_power = 9, RULE_reactive_power = 10, 
+		RULE_number = 11, RULE_integer = 12, RULE_power = 13, RULE_time_period = 14, 
+		RULE_range = 15, RULE_min_time = 16, RULE_max_time = 17, RULE_time_interval = 18;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"init", "startdate", "timebase", "signatures", "device_signature", "energy_signature", 
-			"consumption_block", "real_power", "reactive_power", "power", "time_period", 
-			"range", "min_time", "max_time", "time_interval", "date", "time_of_day"
+			"init", "startdate", "timebase", "date", "time_of_day", "signatures", 
+			"device_signature", "energy_signature", "consumption_block", "real_power", 
+			"reactive_power", "number", "integer", "power", "time_period", "range", 
+			"min_time", "max_time", "time_interval"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -42,8 +43,8 @@ public class ElecDevSigParser extends Parser {
 		return new String[] {
 			null, "'for'", null, null, "'Timebase:'", "'Start:'", "'to'", "'var'", 
 			"'->'", "'W'", "'kW'", null, null, null, null, null, null, null, null, 
-			null, null, null, null, null, null, "'+'", "'-'", "'('", "')'", "'['", 
-			"']'", "'{'", "'}'", "','", "':'", "';'", "'.'"
+			null, null, null, "'+'", "'-'", "'('", "')'", "'['", "']'", "'{'", "'}'", 
+			"','", "':'", "';'", "'.'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -51,10 +52,10 @@ public class ElecDevSigParser extends Parser {
 		return new String[] {
 			null, "FOR", "POWER_UNIT", "TIME_UNIT", "TIMEBASE", "STARTDATE", "TO", 
 			"VARIABLE", "THEN", "WATT", "KILOWATT", "MILLISECOND", "SECOND", "MINUTE", 
-			"HOUR", "NAME", "REAL_NUMBER", "SIGNED_INT", "INTEGER", "DIGITS2", "DIGITS4", 
-			"SIGN", "ALPHANUMERIC", "DAYOFWEEK", "MONTH", "PLUS", "MINUS", "LBRACE", 
-			"RBRACE", "LBRACKET", "RBRACKET", "LCURLY", "RCURLY", "COMMA", "COLON", 
-			"SEMICOLON", "DOT", "COMMENT", "ML_COMMENT", "WS"
+			"HOUR", "DIGITS2", "DIGITS4", "REAL_NUMBER", "WHOLE_NUMBER", "DAYOFWEEK", 
+			"MONTH", "NAME", "PLUS", "MINUS", "LBRACE", "RBRACE", "LBRACKET", "RBRACKET", 
+			"LCURLY", "RCURLY", "COMMA", "COLON", "SEMICOLON", "DOT", "COMMENT", 
+			"ML_COMMENT", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -139,27 +140,27 @@ public class ElecDevSigParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(35);
+			setState(39);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==STARTDATE) {
 				{
-				setState(34);
+				setState(38);
 				startdate();
 				}
 			}
 
-			setState(38);
+			setState(42);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==TIMEBASE) {
 				{
-				setState(37);
+				setState(41);
 				timebase();
 				}
 			}
 
-			setState(40);
+			setState(44);
 			signatures();
 			}
 		}
@@ -203,16 +204,16 @@ public class ElecDevSigParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(42);
+			setState(46);
 			match(STARTDATE);
-			setState(43);
+			setState(47);
 			date();
-			setState(45);
+			setState(49);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==DIGITS2) {
 				{
-				setState(44);
+				setState(48);
 				time_of_day();
 				}
 			}
@@ -255,10 +256,126 @@ public class ElecDevSigParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(47);
+			setState(51);
 			match(TIMEBASE);
-			setState(48);
+			setState(52);
 			time_interval();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class DateContext extends ParserRuleContext {
+		public List<TerminalNode> DIGITS2() { return getTokens(ElecDevSigParser.DIGITS2); }
+		public TerminalNode DIGITS2(int i) {
+			return getToken(ElecDevSigParser.DIGITS2, i);
+		}
+		public TerminalNode MONTH() { return getToken(ElecDevSigParser.MONTH, 0); }
+		public TerminalNode DIGITS4() { return getToken(ElecDevSigParser.DIGITS4, 0); }
+		public DateContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_date; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ElecDevSigListener ) ((ElecDevSigListener)listener).enterDate(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ElecDevSigListener ) ((ElecDevSigListener)listener).exitDate(this);
+		}
+	}
+
+	public final DateContext date() throws RecognitionException {
+		DateContext _localctx = new DateContext(_ctx, getState());
+		enterRule(_localctx, 6, RULE_date);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(54);
+			match(DIGITS2);
+			setState(55);
+			match(MONTH);
+			setState(56);
+			_la = _input.LA(1);
+			if ( !(_la==DIGITS2 || _la==DIGITS4) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Time_of_dayContext extends ParserRuleContext {
+		public List<TerminalNode> DIGITS2() { return getTokens(ElecDevSigParser.DIGITS2); }
+		public TerminalNode DIGITS2(int i) {
+			return getToken(ElecDevSigParser.DIGITS2, i);
+		}
+		public List<TerminalNode> COLON() { return getTokens(ElecDevSigParser.COLON); }
+		public TerminalNode COLON(int i) {
+			return getToken(ElecDevSigParser.COLON, i);
+		}
+		public Time_of_dayContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_time_of_day; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ElecDevSigListener ) ((ElecDevSigListener)listener).enterTime_of_day(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ElecDevSigListener ) ((ElecDevSigListener)listener).exitTime_of_day(this);
+		}
+	}
+
+	public final Time_of_dayContext time_of_day() throws RecognitionException {
+		Time_of_dayContext _localctx = new Time_of_dayContext(_ctx, getState());
+		enterRule(_localctx, 8, RULE_time_of_day);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(58);
+			match(DIGITS2);
+			setState(59);
+			match(COLON);
+			setState(60);
+			match(DIGITS2);
+			setState(63);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==COLON) {
+				{
+				setState(61);
+				match(COLON);
+				setState(62);
+				match(DIGITS2);
+				}
+			}
+
 			}
 		}
 		catch (RecognitionException re) {
@@ -295,22 +412,22 @@ public class ElecDevSigParser extends Parser {
 
 	public final SignaturesContext signatures() throws RecognitionException {
 		SignaturesContext _localctx = new SignaturesContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_signatures);
+		enterRule(_localctx, 10, RULE_signatures);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(51); 
+			setState(66); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(50);
+				setState(65);
 				device_signature();
 				}
 				}
-				setState(53); 
+				setState(68); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==LBRACE );
@@ -364,71 +481,71 @@ public class ElecDevSigParser extends Parser {
 
 	public final Device_signatureContext device_signature() throws RecognitionException {
 		Device_signatureContext _localctx = new Device_signatureContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_device_signature);
+		enterRule(_localctx, 12, RULE_device_signature);
 		int _la;
 		try {
-			setState(81);
+			setState(96);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(55);
+				setState(70);
 				match(LBRACE);
-				setState(56);
+				setState(71);
 				match(NAME);
-				setState(57);
+				setState(72);
 				match(COLON);
-				setState(58);
+				setState(73);
 				energy_signature();
-				setState(63);
+				setState(78);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==THEN) {
 					{
 					{
-					setState(59);
+					setState(74);
 					match(THEN);
-					setState(60);
+					setState(75);
 					energy_signature();
 					}
 					}
-					setState(65);
+					setState(80);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(66);
+				setState(81);
 				match(RBRACE);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(68);
+				setState(83);
 				match(LBRACE);
-				setState(69);
+				setState(84);
 				match(NAME);
-				setState(70);
+				setState(85);
 				match(COLON);
-				setState(71);
+				setState(86);
 				device_signature();
-				setState(76);
+				setState(91);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==THEN) {
 					{
 					{
-					setState(72);
+					setState(87);
 					match(THEN);
-					setState(73);
+					setState(88);
 					device_signature();
 					}
 					}
-					setState(78);
+					setState(93);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(79);
+				setState(94);
 				match(RBRACE);
 				}
 				break;
@@ -474,32 +591,32 @@ public class ElecDevSigParser extends Parser {
 
 	public final Energy_signatureContext energy_signature() throws RecognitionException {
 		Energy_signatureContext _localctx = new Energy_signatureContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_energy_signature);
+		enterRule(_localctx, 14, RULE_energy_signature);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(83);
+			setState(98);
 			match(LBRACKET);
-			setState(84);
+			setState(99);
 			consumption_block();
-			setState(89);
+			setState(104);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==COMMA) {
 				{
 				{
-				setState(85);
+				setState(100);
 				match(COMMA);
-				setState(86);
+				setState(101);
 				consumption_block();
 				}
 				}
-				setState(91);
+				setState(106);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(92);
+			setState(107);
 			match(RBRACKET);
 			}
 		}
@@ -542,28 +659,28 @@ public class ElecDevSigParser extends Parser {
 
 	public final Consumption_blockContext consumption_block() throws RecognitionException {
 		Consumption_blockContext _localctx = new Consumption_blockContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_consumption_block);
+		enterRule(_localctx, 16, RULE_consumption_block);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(94);
+			setState(109);
 			real_power();
-			setState(97);
+			setState(112);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==COMMA) {
 				{
-				setState(95);
+				setState(110);
 				match(COMMA);
-				setState(96);
+				setState(111);
 				reactive_power();
 				}
 			}
 
-			setState(99);
+			setState(114);
 			match(FOR);
-			setState(100);
+			setState(115);
 			time_period();
 			}
 		}
@@ -598,11 +715,11 @@ public class ElecDevSigParser extends Parser {
 
 	public final Real_powerContext real_power() throws RecognitionException {
 		Real_powerContext _localctx = new Real_powerContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_real_power);
+		enterRule(_localctx, 18, RULE_real_power);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(102);
+			setState(117);
 			power();
 			}
 		}
@@ -637,11 +754,11 @@ public class ElecDevSigParser extends Parser {
 
 	public final Reactive_powerContext reactive_power() throws RecognitionException {
 		Reactive_powerContext _localctx = new Reactive_powerContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_reactive_power);
+		enterRule(_localctx, 20, RULE_reactive_power);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(104);
+			setState(119);
 			power();
 			}
 		}
@@ -656,8 +773,107 @@ public class ElecDevSigParser extends Parser {
 		return _localctx;
 	}
 
-	public static class PowerContext extends ParserRuleContext {
+	public static class NumberContext extends ParserRuleContext {
 		public TerminalNode REAL_NUMBER() { return getToken(ElecDevSigParser.REAL_NUMBER, 0); }
+		public TerminalNode WHOLE_NUMBER() { return getToken(ElecDevSigParser.WHOLE_NUMBER, 0); }
+		public TerminalNode DIGITS2() { return getToken(ElecDevSigParser.DIGITS2, 0); }
+		public TerminalNode DIGITS4() { return getToken(ElecDevSigParser.DIGITS4, 0); }
+		public NumberContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_number; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ElecDevSigListener ) ((ElecDevSigListener)listener).enterNumber(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ElecDevSigListener ) ((ElecDevSigListener)listener).exitNumber(this);
+		}
+	}
+
+	public final NumberContext number() throws RecognitionException {
+		NumberContext _localctx = new NumberContext(_ctx, getState());
+		enterRule(_localctx, 22, RULE_number);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(121);
+			_la = _input.LA(1);
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << DIGITS2) | (1L << DIGITS4) | (1L << REAL_NUMBER) | (1L << WHOLE_NUMBER))) != 0)) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class IntegerContext extends ParserRuleContext {
+		public TerminalNode WHOLE_NUMBER() { return getToken(ElecDevSigParser.WHOLE_NUMBER, 0); }
+		public TerminalNode DIGITS2() { return getToken(ElecDevSigParser.DIGITS2, 0); }
+		public TerminalNode DIGITS4() { return getToken(ElecDevSigParser.DIGITS4, 0); }
+		public IntegerContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_integer; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ElecDevSigListener ) ((ElecDevSigListener)listener).enterInteger(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ElecDevSigListener ) ((ElecDevSigListener)listener).exitInteger(this);
+		}
+	}
+
+	public final IntegerContext integer() throws RecognitionException {
+		IntegerContext _localctx = new IntegerContext(_ctx, getState());
+		enterRule(_localctx, 24, RULE_integer);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(123);
+			_la = _input.LA(1);
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << DIGITS2) | (1L << DIGITS4) | (1L << WHOLE_NUMBER))) != 0)) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class PowerContext extends ParserRuleContext {
+		public NumberContext number() {
+			return getRuleContext(NumberContext.class,0);
+		}
 		public TerminalNode POWER_UNIT() { return getToken(ElecDevSigParser.POWER_UNIT, 0); }
 		public PowerContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -675,13 +891,13 @@ public class ElecDevSigParser extends Parser {
 
 	public final PowerContext power() throws RecognitionException {
 		PowerContext _localctx = new PowerContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_power);
+		enterRule(_localctx, 26, RULE_power);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(106);
-			match(REAL_NUMBER);
-			setState(107);
+			setState(125);
+			number();
+			setState(126);
 			match(POWER_UNIT);
 			}
 		}
@@ -720,29 +936,31 @@ public class ElecDevSigParser extends Parser {
 
 	public final Time_periodContext time_period() throws RecognitionException {
 		Time_periodContext _localctx = new Time_periodContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_time_period);
+		enterRule(_localctx, 28, RULE_time_period);
 		try {
-			setState(112);
+			setState(131);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case REAL_NUMBER:
+			case DIGITS2:
+			case DIGITS4:
+			case WHOLE_NUMBER:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(109);
+				setState(128);
 				time_interval();
 				}
 				break;
 			case VARIABLE:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(110);
+				setState(129);
 				match(VARIABLE);
 				}
 				break;
 			case LBRACE:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(111);
+				setState(130);
 				range();
 				}
 				break;
@@ -787,19 +1005,19 @@ public class ElecDevSigParser extends Parser {
 
 	public final RangeContext range() throws RecognitionException {
 		RangeContext _localctx = new RangeContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_range);
+		enterRule(_localctx, 30, RULE_range);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(114);
+			setState(133);
 			match(LBRACE);
-			setState(115);
+			setState(134);
 			min_time();
-			setState(116);
+			setState(135);
 			match(TO);
-			setState(117);
+			setState(136);
 			max_time();
-			setState(118);
+			setState(137);
 			match(RBRACE);
 			}
 		}
@@ -834,11 +1052,11 @@ public class ElecDevSigParser extends Parser {
 
 	public final Min_timeContext min_time() throws RecognitionException {
 		Min_timeContext _localctx = new Min_timeContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_min_time);
+		enterRule(_localctx, 32, RULE_min_time);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(120);
+			setState(139);
 			time_interval();
 			}
 		}
@@ -873,11 +1091,11 @@ public class ElecDevSigParser extends Parser {
 
 	public final Max_timeContext max_time() throws RecognitionException {
 		Max_timeContext _localctx = new Max_timeContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_max_time);
+		enterRule(_localctx, 34, RULE_max_time);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(122);
+			setState(141);
 			time_interval();
 			}
 		}
@@ -893,7 +1111,9 @@ public class ElecDevSigParser extends Parser {
 	}
 
 	public static class Time_intervalContext extends ParserRuleContext {
-		public TerminalNode REAL_NUMBER() { return getToken(ElecDevSigParser.REAL_NUMBER, 0); }
+		public IntegerContext integer() {
+			return getRuleContext(IntegerContext.class,0);
+		}
 		public TerminalNode TIME_UNIT() { return getToken(ElecDevSigParser.TIME_UNIT, 0); }
 		public Time_intervalContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -911,132 +1131,14 @@ public class ElecDevSigParser extends Parser {
 
 	public final Time_intervalContext time_interval() throws RecognitionException {
 		Time_intervalContext _localctx = new Time_intervalContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_time_interval);
+		enterRule(_localctx, 36, RULE_time_interval);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			{
-			setState(124);
-			match(REAL_NUMBER);
-			setState(125);
+			setState(143);
+			integer();
+			setState(144);
 			match(TIME_UNIT);
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class DateContext extends ParserRuleContext {
-		public List<TerminalNode> DIGITS2() { return getTokens(ElecDevSigParser.DIGITS2); }
-		public TerminalNode DIGITS2(int i) {
-			return getToken(ElecDevSigParser.DIGITS2, i);
-		}
-		public TerminalNode MONTH() { return getToken(ElecDevSigParser.MONTH, 0); }
-		public TerminalNode DIGITS4() { return getToken(ElecDevSigParser.DIGITS4, 0); }
-		public DateContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_date; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ElecDevSigListener ) ((ElecDevSigListener)listener).enterDate(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ElecDevSigListener ) ((ElecDevSigListener)listener).exitDate(this);
-		}
-	}
-
-	public final DateContext date() throws RecognitionException {
-		DateContext _localctx = new DateContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_date);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(127);
-			match(DIGITS2);
-			setState(128);
-			match(MONTH);
-			setState(129);
-			_la = _input.LA(1);
-			if ( !(_la==DIGITS2 || _la==DIGITS4) ) {
-			_errHandler.recoverInline(this);
-			}
-			else {
-				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-				_errHandler.reportMatch(this);
-				consume();
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class Time_of_dayContext extends ParserRuleContext {
-		public List<TerminalNode> DIGITS2() { return getTokens(ElecDevSigParser.DIGITS2); }
-		public TerminalNode DIGITS2(int i) {
-			return getToken(ElecDevSigParser.DIGITS2, i);
-		}
-		public List<TerminalNode> COLON() { return getTokens(ElecDevSigParser.COLON); }
-		public TerminalNode COLON(int i) {
-			return getToken(ElecDevSigParser.COLON, i);
-		}
-		public Time_of_dayContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_time_of_day; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ElecDevSigListener ) ((ElecDevSigListener)listener).enterTime_of_day(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ElecDevSigListener ) ((ElecDevSigListener)listener).exitTime_of_day(this);
-		}
-	}
-
-	public final Time_of_dayContext time_of_day() throws RecognitionException {
-		Time_of_dayContext _localctx = new Time_of_dayContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_time_of_day);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(131);
-			match(DIGITS2);
-			setState(132);
-			match(COLON);
-			setState(133);
-			match(DIGITS2);
-			setState(136);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if (_la==COLON) {
-				{
-				setState(134);
-				match(COLON);
-				setState(135);
-				match(DIGITS2);
-				}
-			}
-
 			}
 		}
 		catch (RecognitionException re) {
@@ -1051,40 +1153,43 @@ public class ElecDevSigParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3)\u008d\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3&\u0095\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
-		"\3\2\5\2&\n\2\3\2\5\2)\n\2\3\2\3\2\3\3\3\3\3\3\5\3\60\n\3\3\4\3\4\3\4"+
-		"\3\5\6\5\66\n\5\r\5\16\5\67\3\6\3\6\3\6\3\6\3\6\3\6\7\6@\n\6\f\6\16\6"+
-		"C\13\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\7\6M\n\6\f\6\16\6P\13\6\3\6\3\6"+
-		"\5\6T\n\6\3\7\3\7\3\7\3\7\7\7Z\n\7\f\7\16\7]\13\7\3\7\3\7\3\b\3\b\3\b"+
-		"\5\bd\n\b\3\b\3\b\3\b\3\t\3\t\3\n\3\n\3\13\3\13\3\13\3\f\3\f\3\f\5\fs"+
-		"\n\f\3\r\3\r\3\r\3\r\3\r\3\r\3\16\3\16\3\17\3\17\3\20\3\20\3\20\3\21\3"+
-		"\21\3\21\3\21\3\22\3\22\3\22\3\22\3\22\5\22\u008b\n\22\3\22\2\2\23\2\4"+
-		"\6\b\n\f\16\20\22\24\26\30\32\34\36 \"\2\3\3\2\25\26\2\u0087\2%\3\2\2"+
-		"\2\4,\3\2\2\2\6\61\3\2\2\2\b\65\3\2\2\2\nS\3\2\2\2\fU\3\2\2\2\16`\3\2"+
-		"\2\2\20h\3\2\2\2\22j\3\2\2\2\24l\3\2\2\2\26r\3\2\2\2\30t\3\2\2\2\32z\3"+
-		"\2\2\2\34|\3\2\2\2\36~\3\2\2\2 \u0081\3\2\2\2\"\u0085\3\2\2\2$&\5\4\3"+
-		"\2%$\3\2\2\2%&\3\2\2\2&(\3\2\2\2\')\5\6\4\2(\'\3\2\2\2()\3\2\2\2)*\3\2"+
-		"\2\2*+\5\b\5\2+\3\3\2\2\2,-\7\7\2\2-/\5 \21\2.\60\5\"\22\2/.\3\2\2\2/"+
-		"\60\3\2\2\2\60\5\3\2\2\2\61\62\7\6\2\2\62\63\5\36\20\2\63\7\3\2\2\2\64"+
-		"\66\5\n\6\2\65\64\3\2\2\2\66\67\3\2\2\2\67\65\3\2\2\2\678\3\2\2\28\t\3"+
-		"\2\2\29:\7\35\2\2:;\7\21\2\2;<\7$\2\2<A\5\f\7\2=>\7\n\2\2>@\5\f\7\2?="+
-		"\3\2\2\2@C\3\2\2\2A?\3\2\2\2AB\3\2\2\2BD\3\2\2\2CA\3\2\2\2DE\7\36\2\2"+
-		"ET\3\2\2\2FG\7\35\2\2GH\7\21\2\2HI\7$\2\2IN\5\n\6\2JK\7\n\2\2KM\5\n\6"+
-		"\2LJ\3\2\2\2MP\3\2\2\2NL\3\2\2\2NO\3\2\2\2OQ\3\2\2\2PN\3\2\2\2QR\7\36"+
-		"\2\2RT\3\2\2\2S9\3\2\2\2SF\3\2\2\2T\13\3\2\2\2UV\7\37\2\2V[\5\16\b\2W"+
-		"X\7#\2\2XZ\5\16\b\2YW\3\2\2\2Z]\3\2\2\2[Y\3\2\2\2[\\\3\2\2\2\\^\3\2\2"+
-		"\2][\3\2\2\2^_\7 \2\2_\r\3\2\2\2`c\5\20\t\2ab\7#\2\2bd\5\22\n\2ca\3\2"+
-		"\2\2cd\3\2\2\2de\3\2\2\2ef\7\3\2\2fg\5\26\f\2g\17\3\2\2\2hi\5\24\13\2"+
-		"i\21\3\2\2\2jk\5\24\13\2k\23\3\2\2\2lm\7\22\2\2mn\7\4\2\2n\25\3\2\2\2"+
-		"os\5\36\20\2ps\7\t\2\2qs\5\30\r\2ro\3\2\2\2rp\3\2\2\2rq\3\2\2\2s\27\3"+
-		"\2\2\2tu\7\35\2\2uv\5\32\16\2vw\7\b\2\2wx\5\34\17\2xy\7\36\2\2y\31\3\2"+
-		"\2\2z{\5\36\20\2{\33\3\2\2\2|}\5\36\20\2}\35\3\2\2\2~\177\7\22\2\2\177"+
-		"\u0080\7\5\2\2\u0080\37\3\2\2\2\u0081\u0082\7\25\2\2\u0082\u0083\7\32"+
-		"\2\2\u0083\u0084\t\2\2\2\u0084!\3\2\2\2\u0085\u0086\7\25\2\2\u0086\u0087"+
-		"\7$\2\2\u0087\u008a\7\25\2\2\u0088\u0089\7$\2\2\u0089\u008b\7\25\2\2\u008a"+
-		"\u0088\3\2\2\2\u008a\u008b\3\2\2\2\u008b#\3\2\2\2\r%(/\67ANS[cr\u008a";
+		"\4\23\t\23\4\24\t\24\3\2\5\2*\n\2\3\2\5\2-\n\2\3\2\3\2\3\3\3\3\3\3\5\3"+
+		"\64\n\3\3\4\3\4\3\4\3\5\3\5\3\5\3\5\3\6\3\6\3\6\3\6\3\6\5\6B\n\6\3\7\6"+
+		"\7E\n\7\r\7\16\7F\3\b\3\b\3\b\3\b\3\b\3\b\7\bO\n\b\f\b\16\bR\13\b\3\b"+
+		"\3\b\3\b\3\b\3\b\3\b\3\b\3\b\7\b\\\n\b\f\b\16\b_\13\b\3\b\3\b\5\bc\n\b"+
+		"\3\t\3\t\3\t\3\t\7\ti\n\t\f\t\16\tl\13\t\3\t\3\t\3\n\3\n\3\n\5\ns\n\n"+
+		"\3\n\3\n\3\n\3\13\3\13\3\f\3\f\3\r\3\r\3\16\3\16\3\17\3\17\3\17\3\20\3"+
+		"\20\3\20\5\20\u0086\n\20\3\21\3\21\3\21\3\21\3\21\3\21\3\22\3\22\3\23"+
+		"\3\23\3\24\3\24\3\24\3\24\2\2\25\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36"+
+		" \"$&\2\5\3\2\21\22\3\2\21\24\4\2\21\22\24\24\2\u008d\2)\3\2\2\2\4\60"+
+		"\3\2\2\2\6\65\3\2\2\2\b8\3\2\2\2\n<\3\2\2\2\fD\3\2\2\2\16b\3\2\2\2\20"+
+		"d\3\2\2\2\22o\3\2\2\2\24w\3\2\2\2\26y\3\2\2\2\30{\3\2\2\2\32}\3\2\2\2"+
+		"\34\177\3\2\2\2\36\u0085\3\2\2\2 \u0087\3\2\2\2\"\u008d\3\2\2\2$\u008f"+
+		"\3\2\2\2&\u0091\3\2\2\2(*\5\4\3\2)(\3\2\2\2)*\3\2\2\2*,\3\2\2\2+-\5\6"+
+		"\4\2,+\3\2\2\2,-\3\2\2\2-.\3\2\2\2./\5\f\7\2/\3\3\2\2\2\60\61\7\7\2\2"+
+		"\61\63\5\b\5\2\62\64\5\n\6\2\63\62\3\2\2\2\63\64\3\2\2\2\64\5\3\2\2\2"+
+		"\65\66\7\6\2\2\66\67\5&\24\2\67\7\3\2\2\289\7\21\2\29:\7\26\2\2:;\t\2"+
+		"\2\2;\t\3\2\2\2<=\7\21\2\2=>\7!\2\2>A\7\21\2\2?@\7!\2\2@B\7\21\2\2A?\3"+
+		"\2\2\2AB\3\2\2\2B\13\3\2\2\2CE\5\16\b\2DC\3\2\2\2EF\3\2\2\2FD\3\2\2\2"+
+		"FG\3\2\2\2G\r\3\2\2\2HI\7\32\2\2IJ\7\27\2\2JK\7!\2\2KP\5\20\t\2LM\7\n"+
+		"\2\2MO\5\20\t\2NL\3\2\2\2OR\3\2\2\2PN\3\2\2\2PQ\3\2\2\2QS\3\2\2\2RP\3"+
+		"\2\2\2ST\7\33\2\2Tc\3\2\2\2UV\7\32\2\2VW\7\27\2\2WX\7!\2\2X]\5\16\b\2"+
+		"YZ\7\n\2\2Z\\\5\16\b\2[Y\3\2\2\2\\_\3\2\2\2][\3\2\2\2]^\3\2\2\2^`\3\2"+
+		"\2\2_]\3\2\2\2`a\7\33\2\2ac\3\2\2\2bH\3\2\2\2bU\3\2\2\2c\17\3\2\2\2de"+
+		"\7\34\2\2ej\5\22\n\2fg\7 \2\2gi\5\22\n\2hf\3\2\2\2il\3\2\2\2jh\3\2\2\2"+
+		"jk\3\2\2\2km\3\2\2\2lj\3\2\2\2mn\7\35\2\2n\21\3\2\2\2or\5\24\13\2pq\7"+
+		" \2\2qs\5\26\f\2rp\3\2\2\2rs\3\2\2\2st\3\2\2\2tu\7\3\2\2uv\5\36\20\2v"+
+		"\23\3\2\2\2wx\5\34\17\2x\25\3\2\2\2yz\5\34\17\2z\27\3\2\2\2{|\t\3\2\2"+
+		"|\31\3\2\2\2}~\t\4\2\2~\33\3\2\2\2\177\u0080\5\30\r\2\u0080\u0081\7\4"+
+		"\2\2\u0081\35\3\2\2\2\u0082\u0086\5&\24\2\u0083\u0086\7\t\2\2\u0084\u0086"+
+		"\5 \21\2\u0085\u0082\3\2\2\2\u0085\u0083\3\2\2\2\u0085\u0084\3\2\2\2\u0086"+
+		"\37\3\2\2\2\u0087\u0088\7\32\2\2\u0088\u0089\5\"\22\2\u0089\u008a\7\b"+
+		"\2\2\u008a\u008b\5$\23\2\u008b\u008c\7\33\2\2\u008c!\3\2\2\2\u008d\u008e"+
+		"\5&\24\2\u008e#\3\2\2\2\u008f\u0090\5&\24\2\u0090%\3\2\2\2\u0091\u0092"+
+		"\5\32\16\2\u0092\u0093\7\5\2\2\u0093\'\3\2\2\2\r),\63AFP]bjr\u0085";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
