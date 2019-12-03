@@ -18,23 +18,24 @@ public class ElecDevSigParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		FOR=1, POWER_UNIT=2, TIME_UNIT=3, TIMEBASE=4, STARTDATE=5, TO=6, VARIABLE=7, 
-		THEN=8, WATT=9, KILOWATT=10, MILLISECOND=11, SECOND=12, MINUTE=13, HOUR=14, 
-		DIGITS2=15, DIGITS4=16, REAL_NUMBER=17, WHOLE_NUMBER=18, DAYOFWEEK=19, 
-		MONTH=20, NAME=21, PLUS=22, MINUS=23, LBRACE=24, RBRACE=25, LBRACKET=26, 
-		RBRACKET=27, LCURLY=28, RCURLY=29, COMMA=30, COLON=31, SEMICOLON=32, DOT=33, 
-		COMMENT=34, ML_COMMENT=35, WS=36;
+		FLAT=8, RISING=9, FALLING=10, RANDOM=11, THEN=12, WATT=13, KILOWATT=14, 
+		MILLISECOND=15, SECOND=16, MINUTE=17, HOUR=18, DIGITS2=19, DIGITS4=20, 
+		REAL_NUMBER=21, WHOLE_NUMBER=22, DAYOFWEEK=23, MONTH=24, NAME=25, PLUS=26, 
+		MINUS=27, LBRACE=28, RBRACE=29, LBRACKET=30, RBRACKET=31, LCURLY=32, RCURLY=33, 
+		COMMA=34, COLON=35, SEMICOLON=36, DOT=37, COMMENT=38, ML_COMMENT=39, WS=40;
 	public static final int
-		RULE_init = 0, RULE_startdate = 1, RULE_timebase = 2, RULE_date = 3, RULE_time_of_day = 4, 
-		RULE_signatures = 5, RULE_device_signature = 6, RULE_energy_signature = 7, 
-		RULE_consumption_block = 8, RULE_real_power = 9, RULE_reactive_power = 10, 
-		RULE_number = 11, RULE_integer = 12, RULE_power = 13, RULE_time_period = 14, 
-		RULE_range = 15, RULE_min_time = 16, RULE_max_time = 17, RULE_time_interval = 18;
+		RULE_init = 0, RULE_startdate = 1, RULE_timebase = 2, RULE_date = 3, RULE_year = 4, 
+		RULE_day_of_month = 5, RULE_time_of_day = 6, RULE_signatures = 7, RULE_device_signature = 8, 
+		RULE_energy_signature = 9, RULE_consumption_block = 10, RULE_real_power = 11, 
+		RULE_reactive_power = 12, RULE_number = 13, RULE_integer = 14, RULE_power = 15, 
+		RULE_power_range = 16, RULE_shape = 17, RULE_time_period = 18, RULE_range = 19, 
+		RULE_min_time = 20, RULE_max_time = 21, RULE_time_interval = 22;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"init", "startdate", "timebase", "date", "time_of_day", "signatures", 
-			"device_signature", "energy_signature", "consumption_block", "real_power", 
-			"reactive_power", "number", "integer", "power", "time_period", "range", 
-			"min_time", "max_time", "time_interval"
+			"init", "startdate", "timebase", "date", "year", "day_of_month", "time_of_day", 
+			"signatures", "device_signature", "energy_signature", "consumption_block", 
+			"real_power", "reactive_power", "number", "integer", "power", "power_range", 
+			"shape", "time_period", "range", "min_time", "max_time", "time_interval"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -42,20 +43,21 @@ public class ElecDevSigParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "'for'", null, null, "'Timebase:'", "'Start:'", "'to'", "'var'", 
-			"'->'", "'W'", "'kW'", null, null, null, null, null, null, null, null, 
-			null, null, null, "'+'", "'-'", "'('", "')'", "'['", "']'", "'{'", "'}'", 
-			"','", "':'", "';'", "'.'"
+			"'flat'", "'rising'", "'falling'", "'random'", "'->'", "'W'", "'kW'", 
+			null, null, null, null, null, null, null, null, null, null, null, "'+'", 
+			"'-'", "'('", "')'", "'['", "']'", "'{'", "'}'", "','", "':'", "';'", 
+			"'.'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, "FOR", "POWER_UNIT", "TIME_UNIT", "TIMEBASE", "STARTDATE", "TO", 
-			"VARIABLE", "THEN", "WATT", "KILOWATT", "MILLISECOND", "SECOND", "MINUTE", 
-			"HOUR", "DIGITS2", "DIGITS4", "REAL_NUMBER", "WHOLE_NUMBER", "DAYOFWEEK", 
-			"MONTH", "NAME", "PLUS", "MINUS", "LBRACE", "RBRACE", "LBRACKET", "RBRACKET", 
-			"LCURLY", "RCURLY", "COMMA", "COLON", "SEMICOLON", "DOT", "COMMENT", 
-			"ML_COMMENT", "WS"
+			"VARIABLE", "FLAT", "RISING", "FALLING", "RANDOM", "THEN", "WATT", "KILOWATT", 
+			"MILLISECOND", "SECOND", "MINUTE", "HOUR", "DIGITS2", "DIGITS4", "REAL_NUMBER", 
+			"WHOLE_NUMBER", "DAYOFWEEK", "MONTH", "NAME", "PLUS", "MINUS", "LBRACE", 
+			"RBRACE", "LBRACKET", "RBRACKET", "LCURLY", "RCURLY", "COMMA", "COLON", 
+			"SEMICOLON", "DOT", "COMMENT", "ML_COMMENT", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -140,27 +142,27 @@ public class ElecDevSigParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(39);
+			setState(47);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==STARTDATE) {
 				{
-				setState(38);
+				setState(46);
 				startdate();
 				}
 			}
 
-			setState(42);
+			setState(50);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==TIMEBASE) {
 				{
-				setState(41);
+				setState(49);
 				timebase();
 				}
 			}
 
-			setState(44);
+			setState(52);
 			signatures();
 			}
 		}
@@ -204,16 +206,16 @@ public class ElecDevSigParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(46);
+			setState(54);
 			match(STARTDATE);
-			setState(47);
+			setState(55);
 			date();
-			setState(49);
+			setState(57);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==DIGITS2) {
 				{
-				setState(48);
+				setState(56);
 				time_of_day();
 				}
 			}
@@ -256,9 +258,9 @@ public class ElecDevSigParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(51);
+			setState(59);
 			match(TIMEBASE);
-			setState(52);
+			setState(60);
 			time_interval();
 			}
 		}
@@ -274,12 +276,13 @@ public class ElecDevSigParser extends Parser {
 	}
 
 	public static class DateContext extends ParserRuleContext {
-		public List<TerminalNode> DIGITS2() { return getTokens(ElecDevSigParser.DIGITS2); }
-		public TerminalNode DIGITS2(int i) {
-			return getToken(ElecDevSigParser.DIGITS2, i);
+		public Day_of_monthContext day_of_month() {
+			return getRuleContext(Day_of_monthContext.class,0);
 		}
 		public TerminalNode MONTH() { return getToken(ElecDevSigParser.MONTH, 0); }
-		public TerminalNode DIGITS4() { return getToken(ElecDevSigParser.DIGITS4, 0); }
+		public YearContext year() {
+			return getRuleContext(YearContext.class,0);
+		}
 		public DateContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -297,15 +300,53 @@ public class ElecDevSigParser extends Parser {
 	public final DateContext date() throws RecognitionException {
 		DateContext _localctx = new DateContext(_ctx, getState());
 		enterRule(_localctx, 6, RULE_date);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(62);
+			day_of_month();
+			setState(63);
+			match(MONTH);
+			setState(64);
+			year();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class YearContext extends ParserRuleContext {
+		public TerminalNode DIGITS2() { return getToken(ElecDevSigParser.DIGITS2, 0); }
+		public TerminalNode DIGITS4() { return getToken(ElecDevSigParser.DIGITS4, 0); }
+		public YearContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_year; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ElecDevSigListener ) ((ElecDevSigListener)listener).enterYear(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ElecDevSigListener ) ((ElecDevSigListener)listener).exitYear(this);
+		}
+	}
+
+	public final YearContext year() throws RecognitionException {
+		YearContext _localctx = new YearContext(_ctx, getState());
+		enterRule(_localctx, 8, RULE_year);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(54);
-			match(DIGITS2);
-			setState(55);
-			match(MONTH);
-			setState(56);
+			setState(66);
 			_la = _input.LA(1);
 			if ( !(_la==DIGITS2 || _la==DIGITS4) ) {
 			_errHandler.recoverInline(this);
@@ -315,6 +356,43 @@ public class ElecDevSigParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Day_of_monthContext extends ParserRuleContext {
+		public TerminalNode DIGITS2() { return getToken(ElecDevSigParser.DIGITS2, 0); }
+		public Day_of_monthContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_day_of_month; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ElecDevSigListener ) ((ElecDevSigListener)listener).enterDay_of_month(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ElecDevSigListener ) ((ElecDevSigListener)listener).exitDay_of_month(this);
+		}
+	}
+
+	public final Day_of_monthContext day_of_month() throws RecognitionException {
+		Day_of_monthContext _localctx = new Day_of_monthContext(_ctx, getState());
+		enterRule(_localctx, 10, RULE_day_of_month);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(68);
+			match(DIGITS2);
 			}
 		}
 		catch (RecognitionException re) {
@@ -353,25 +431,25 @@ public class ElecDevSigParser extends Parser {
 
 	public final Time_of_dayContext time_of_day() throws RecognitionException {
 		Time_of_dayContext _localctx = new Time_of_dayContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_time_of_day);
+		enterRule(_localctx, 12, RULE_time_of_day);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(58);
+			setState(70);
 			match(DIGITS2);
-			setState(59);
+			setState(71);
 			match(COLON);
-			setState(60);
+			setState(72);
 			match(DIGITS2);
-			setState(63);
+			setState(75);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==COLON) {
 				{
-				setState(61);
+				setState(73);
 				match(COLON);
-				setState(62);
+				setState(74);
 				match(DIGITS2);
 				}
 			}
@@ -412,22 +490,22 @@ public class ElecDevSigParser extends Parser {
 
 	public final SignaturesContext signatures() throws RecognitionException {
 		SignaturesContext _localctx = new SignaturesContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_signatures);
+		enterRule(_localctx, 14, RULE_signatures);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(66); 
+			setState(78); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(65);
+				setState(77);
 				device_signature();
 				}
 				}
-				setState(68); 
+				setState(80); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==LBRACE );
@@ -481,71 +559,71 @@ public class ElecDevSigParser extends Parser {
 
 	public final Device_signatureContext device_signature() throws RecognitionException {
 		Device_signatureContext _localctx = new Device_signatureContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_device_signature);
+		enterRule(_localctx, 16, RULE_device_signature);
 		int _la;
 		try {
-			setState(96);
+			setState(108);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(70);
+				setState(82);
 				match(LBRACE);
-				setState(71);
+				setState(83);
 				match(NAME);
-				setState(72);
+				setState(84);
 				match(COLON);
-				setState(73);
+				setState(85);
 				energy_signature();
-				setState(78);
+				setState(90);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==THEN) {
 					{
 					{
-					setState(74);
+					setState(86);
 					match(THEN);
-					setState(75);
+					setState(87);
 					energy_signature();
 					}
 					}
-					setState(80);
+					setState(92);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(81);
+				setState(93);
 				match(RBRACE);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(83);
+				setState(95);
 				match(LBRACE);
-				setState(84);
+				setState(96);
 				match(NAME);
-				setState(85);
+				setState(97);
 				match(COLON);
-				setState(86);
+				setState(98);
 				device_signature();
-				setState(91);
+				setState(103);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==THEN) {
 					{
 					{
-					setState(87);
+					setState(99);
 					match(THEN);
-					setState(88);
+					setState(100);
 					device_signature();
 					}
 					}
-					setState(93);
+					setState(105);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(94);
+				setState(106);
 				match(RBRACE);
 				}
 				break;
@@ -591,32 +669,32 @@ public class ElecDevSigParser extends Parser {
 
 	public final Energy_signatureContext energy_signature() throws RecognitionException {
 		Energy_signatureContext _localctx = new Energy_signatureContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_energy_signature);
+		enterRule(_localctx, 18, RULE_energy_signature);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(98);
+			setState(110);
 			match(LBRACKET);
-			setState(99);
+			setState(111);
 			consumption_block();
-			setState(104);
+			setState(116);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==COMMA) {
 				{
 				{
-				setState(100);
+				setState(112);
 				match(COMMA);
-				setState(101);
+				setState(113);
 				consumption_block();
 				}
 				}
-				setState(106);
+				setState(118);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(107);
+			setState(119);
 			match(RBRACKET);
 			}
 		}
@@ -659,28 +737,28 @@ public class ElecDevSigParser extends Parser {
 
 	public final Consumption_blockContext consumption_block() throws RecognitionException {
 		Consumption_blockContext _localctx = new Consumption_blockContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_consumption_block);
+		enterRule(_localctx, 20, RULE_consumption_block);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(109);
+			setState(121);
 			real_power();
-			setState(112);
+			setState(124);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==COMMA) {
 				{
-				setState(110);
+				setState(122);
 				match(COMMA);
-				setState(111);
+				setState(123);
 				reactive_power();
 				}
 			}
 
-			setState(114);
+			setState(126);
 			match(FOR);
-			setState(115);
+			setState(127);
 			time_period();
 			}
 		}
@@ -715,11 +793,11 @@ public class ElecDevSigParser extends Parser {
 
 	public final Real_powerContext real_power() throws RecognitionException {
 		Real_powerContext _localctx = new Real_powerContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_real_power);
+		enterRule(_localctx, 22, RULE_real_power);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(117);
+			setState(129);
 			power();
 			}
 		}
@@ -754,11 +832,11 @@ public class ElecDevSigParser extends Parser {
 
 	public final Reactive_powerContext reactive_power() throws RecognitionException {
 		Reactive_powerContext _localctx = new Reactive_powerContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_reactive_power);
+		enterRule(_localctx, 24, RULE_reactive_power);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(119);
+			setState(131);
 			power();
 			}
 		}
@@ -794,12 +872,12 @@ public class ElecDevSigParser extends Parser {
 
 	public final NumberContext number() throws RecognitionException {
 		NumberContext _localctx = new NumberContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_number);
+		enterRule(_localctx, 26, RULE_number);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(121);
+			setState(133);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << DIGITS2) | (1L << DIGITS4) | (1L << REAL_NUMBER) | (1L << WHOLE_NUMBER))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -842,12 +920,12 @@ public class ElecDevSigParser extends Parser {
 
 	public final IntegerContext integer() throws RecognitionException {
 		IntegerContext _localctx = new IntegerContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_integer);
+		enterRule(_localctx, 28, RULE_integer);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(123);
+			setState(135);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << DIGITS2) | (1L << DIGITS4) | (1L << WHOLE_NUMBER))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -875,6 +953,9 @@ public class ElecDevSigParser extends Parser {
 			return getRuleContext(NumberContext.class,0);
 		}
 		public TerminalNode POWER_UNIT() { return getToken(ElecDevSigParser.POWER_UNIT, 0); }
+		public Power_rangeContext power_range() {
+			return getRuleContext(Power_rangeContext.class,0);
+		}
 		public PowerContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -891,14 +972,156 @@ public class ElecDevSigParser extends Parser {
 
 	public final PowerContext power() throws RecognitionException {
 		PowerContext _localctx = new PowerContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_power);
+		enterRule(_localctx, 30, RULE_power);
+		try {
+			setState(141);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case DIGITS2:
+			case DIGITS4:
+			case REAL_NUMBER:
+			case WHOLE_NUMBER:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(137);
+				number();
+				setState(138);
+				match(POWER_UNIT);
+				}
+				break;
+			case LBRACE:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(140);
+				power_range();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Power_rangeContext extends ParserRuleContext {
+		public TerminalNode LBRACE() { return getToken(ElecDevSigParser.LBRACE, 0); }
+		public List<NumberContext> number() {
+			return getRuleContexts(NumberContext.class);
+		}
+		public NumberContext number(int i) {
+			return getRuleContext(NumberContext.class,i);
+		}
+		public List<TerminalNode> POWER_UNIT() { return getTokens(ElecDevSigParser.POWER_UNIT); }
+		public TerminalNode POWER_UNIT(int i) {
+			return getToken(ElecDevSigParser.POWER_UNIT, i);
+		}
+		public TerminalNode COLON() { return getToken(ElecDevSigParser.COLON, 0); }
+		public TerminalNode RBRACE() { return getToken(ElecDevSigParser.RBRACE, 0); }
+		public ShapeContext shape() {
+			return getRuleContext(ShapeContext.class,0);
+		}
+		public Power_rangeContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_power_range; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ElecDevSigListener ) ((ElecDevSigListener)listener).enterPower_range(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ElecDevSigListener ) ((ElecDevSigListener)listener).exitPower_range(this);
+		}
+	}
+
+	public final Power_rangeContext power_range() throws RecognitionException {
+		Power_rangeContext _localctx = new Power_rangeContext(_ctx, getState());
+		enterRule(_localctx, 32, RULE_power_range);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(125);
+			setState(143);
+			match(LBRACE);
+			setState(144);
 			number();
-			setState(126);
+			setState(145);
 			match(POWER_UNIT);
+			setState(146);
+			match(COLON);
+			setState(147);
+			number();
+			setState(148);
+			match(POWER_UNIT);
+			setState(150);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << FLAT) | (1L << RISING) | (1L << FALLING) | (1L << RANDOM))) != 0)) {
+				{
+				setState(149);
+				shape();
+				}
+			}
+
+			setState(152);
+			match(RBRACE);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ShapeContext extends ParserRuleContext {
+		public TerminalNode FLAT() { return getToken(ElecDevSigParser.FLAT, 0); }
+		public TerminalNode RISING() { return getToken(ElecDevSigParser.RISING, 0); }
+		public TerminalNode FALLING() { return getToken(ElecDevSigParser.FALLING, 0); }
+		public TerminalNode RANDOM() { return getToken(ElecDevSigParser.RANDOM, 0); }
+		public ShapeContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_shape; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ElecDevSigListener ) ((ElecDevSigListener)listener).enterShape(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ElecDevSigListener ) ((ElecDevSigListener)listener).exitShape(this);
+		}
+	}
+
+	public final ShapeContext shape() throws RecognitionException {
+		ShapeContext _localctx = new ShapeContext(_ctx, getState());
+		enterRule(_localctx, 34, RULE_shape);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(154);
+			_la = _input.LA(1);
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << FLAT) | (1L << RISING) | (1L << FALLING) | (1L << RANDOM))) != 0)) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -936,9 +1159,9 @@ public class ElecDevSigParser extends Parser {
 
 	public final Time_periodContext time_period() throws RecognitionException {
 		Time_periodContext _localctx = new Time_periodContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_time_period);
+		enterRule(_localctx, 36, RULE_time_period);
 		try {
-			setState(131);
+			setState(159);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case DIGITS2:
@@ -946,21 +1169,21 @@ public class ElecDevSigParser extends Parser {
 			case WHOLE_NUMBER:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(128);
+				setState(156);
 				time_interval();
 				}
 				break;
 			case VARIABLE:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(129);
+				setState(157);
 				match(VARIABLE);
 				}
 				break;
 			case LBRACE:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(130);
+				setState(158);
 				range();
 				}
 				break;
@@ -1005,19 +1228,19 @@ public class ElecDevSigParser extends Parser {
 
 	public final RangeContext range() throws RecognitionException {
 		RangeContext _localctx = new RangeContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_range);
+		enterRule(_localctx, 38, RULE_range);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(133);
+			setState(161);
 			match(LBRACE);
-			setState(134);
+			setState(162);
 			min_time();
-			setState(135);
+			setState(163);
 			match(TO);
-			setState(136);
+			setState(164);
 			max_time();
-			setState(137);
+			setState(165);
 			match(RBRACE);
 			}
 		}
@@ -1052,11 +1275,11 @@ public class ElecDevSigParser extends Parser {
 
 	public final Min_timeContext min_time() throws RecognitionException {
 		Min_timeContext _localctx = new Min_timeContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_min_time);
+		enterRule(_localctx, 40, RULE_min_time);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(139);
+			setState(167);
 			time_interval();
 			}
 		}
@@ -1091,11 +1314,11 @@ public class ElecDevSigParser extends Parser {
 
 	public final Max_timeContext max_time() throws RecognitionException {
 		Max_timeContext _localctx = new Max_timeContext(_ctx, getState());
-		enterRule(_localctx, 34, RULE_max_time);
+		enterRule(_localctx, 42, RULE_max_time);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(141);
+			setState(169);
 			time_interval();
 			}
 		}
@@ -1131,13 +1354,13 @@ public class ElecDevSigParser extends Parser {
 
 	public final Time_intervalContext time_interval() throws RecognitionException {
 		Time_intervalContext _localctx = new Time_intervalContext(_ctx, getState());
-		enterRule(_localctx, 36, RULE_time_interval);
+		enterRule(_localctx, 44, RULE_time_interval);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(143);
+			setState(171);
 			integer();
-			setState(144);
+			setState(172);
 			match(TIME_UNIT);
 			}
 		}
@@ -1153,43 +1376,54 @@ public class ElecDevSigParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3&\u0095\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3*\u00b1\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
-		"\4\23\t\23\4\24\t\24\3\2\5\2*\n\2\3\2\5\2-\n\2\3\2\3\2\3\3\3\3\3\3\5\3"+
-		"\64\n\3\3\4\3\4\3\4\3\5\3\5\3\5\3\5\3\6\3\6\3\6\3\6\3\6\5\6B\n\6\3\7\6"+
-		"\7E\n\7\r\7\16\7F\3\b\3\b\3\b\3\b\3\b\3\b\7\bO\n\b\f\b\16\bR\13\b\3\b"+
-		"\3\b\3\b\3\b\3\b\3\b\3\b\3\b\7\b\\\n\b\f\b\16\b_\13\b\3\b\3\b\5\bc\n\b"+
-		"\3\t\3\t\3\t\3\t\7\ti\n\t\f\t\16\tl\13\t\3\t\3\t\3\n\3\n\3\n\5\ns\n\n"+
-		"\3\n\3\n\3\n\3\13\3\13\3\f\3\f\3\r\3\r\3\16\3\16\3\17\3\17\3\17\3\20\3"+
-		"\20\3\20\5\20\u0086\n\20\3\21\3\21\3\21\3\21\3\21\3\21\3\22\3\22\3\23"+
-		"\3\23\3\24\3\24\3\24\3\24\2\2\25\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36"+
-		" \"$&\2\5\3\2\21\22\3\2\21\24\4\2\21\22\24\24\2\u008d\2)\3\2\2\2\4\60"+
-		"\3\2\2\2\6\65\3\2\2\2\b8\3\2\2\2\n<\3\2\2\2\fD\3\2\2\2\16b\3\2\2\2\20"+
-		"d\3\2\2\2\22o\3\2\2\2\24w\3\2\2\2\26y\3\2\2\2\30{\3\2\2\2\32}\3\2\2\2"+
-		"\34\177\3\2\2\2\36\u0085\3\2\2\2 \u0087\3\2\2\2\"\u008d\3\2\2\2$\u008f"+
-		"\3\2\2\2&\u0091\3\2\2\2(*\5\4\3\2)(\3\2\2\2)*\3\2\2\2*,\3\2\2\2+-\5\6"+
-		"\4\2,+\3\2\2\2,-\3\2\2\2-.\3\2\2\2./\5\f\7\2/\3\3\2\2\2\60\61\7\7\2\2"+
-		"\61\63\5\b\5\2\62\64\5\n\6\2\63\62\3\2\2\2\63\64\3\2\2\2\64\5\3\2\2\2"+
-		"\65\66\7\6\2\2\66\67\5&\24\2\67\7\3\2\2\289\7\21\2\29:\7\26\2\2:;\t\2"+
-		"\2\2;\t\3\2\2\2<=\7\21\2\2=>\7!\2\2>A\7\21\2\2?@\7!\2\2@B\7\21\2\2A?\3"+
-		"\2\2\2AB\3\2\2\2B\13\3\2\2\2CE\5\16\b\2DC\3\2\2\2EF\3\2\2\2FD\3\2\2\2"+
-		"FG\3\2\2\2G\r\3\2\2\2HI\7\32\2\2IJ\7\27\2\2JK\7!\2\2KP\5\20\t\2LM\7\n"+
-		"\2\2MO\5\20\t\2NL\3\2\2\2OR\3\2\2\2PN\3\2\2\2PQ\3\2\2\2QS\3\2\2\2RP\3"+
-		"\2\2\2ST\7\33\2\2Tc\3\2\2\2UV\7\32\2\2VW\7\27\2\2WX\7!\2\2X]\5\16\b\2"+
-		"YZ\7\n\2\2Z\\\5\16\b\2[Y\3\2\2\2\\_\3\2\2\2][\3\2\2\2]^\3\2\2\2^`\3\2"+
-		"\2\2_]\3\2\2\2`a\7\33\2\2ac\3\2\2\2bH\3\2\2\2bU\3\2\2\2c\17\3\2\2\2de"+
-		"\7\34\2\2ej\5\22\n\2fg\7 \2\2gi\5\22\n\2hf\3\2\2\2il\3\2\2\2jh\3\2\2\2"+
-		"jk\3\2\2\2km\3\2\2\2lj\3\2\2\2mn\7\35\2\2n\21\3\2\2\2or\5\24\13\2pq\7"+
-		" \2\2qs\5\26\f\2rp\3\2\2\2rs\3\2\2\2st\3\2\2\2tu\7\3\2\2uv\5\36\20\2v"+
-		"\23\3\2\2\2wx\5\34\17\2x\25\3\2\2\2yz\5\34\17\2z\27\3\2\2\2{|\t\3\2\2"+
-		"|\31\3\2\2\2}~\t\4\2\2~\33\3\2\2\2\177\u0080\5\30\r\2\u0080\u0081\7\4"+
-		"\2\2\u0081\35\3\2\2\2\u0082\u0086\5&\24\2\u0083\u0086\7\t\2\2\u0084\u0086"+
-		"\5 \21\2\u0085\u0082\3\2\2\2\u0085\u0083\3\2\2\2\u0085\u0084\3\2\2\2\u0086"+
-		"\37\3\2\2\2\u0087\u0088\7\32\2\2\u0088\u0089\5\"\22\2\u0089\u008a\7\b"+
-		"\2\2\u008a\u008b\5$\23\2\u008b\u008c\7\33\2\2\u008c!\3\2\2\2\u008d\u008e"+
-		"\5&\24\2\u008e#\3\2\2\2\u008f\u0090\5&\24\2\u0090%\3\2\2\2\u0091\u0092"+
-		"\5\32\16\2\u0092\u0093\7\5\2\2\u0093\'\3\2\2\2\r),\63AFP]bjr\u0085";
+		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\3\2\5\2\62"+
+		"\n\2\3\2\5\2\65\n\2\3\2\3\2\3\3\3\3\3\3\5\3<\n\3\3\4\3\4\3\4\3\5\3\5\3"+
+		"\5\3\5\3\6\3\6\3\7\3\7\3\b\3\b\3\b\3\b\3\b\5\bN\n\b\3\t\6\tQ\n\t\r\t\16"+
+		"\tR\3\n\3\n\3\n\3\n\3\n\3\n\7\n[\n\n\f\n\16\n^\13\n\3\n\3\n\3\n\3\n\3"+
+		"\n\3\n\3\n\3\n\7\nh\n\n\f\n\16\nk\13\n\3\n\3\n\5\no\n\n\3\13\3\13\3\13"+
+		"\3\13\7\13u\n\13\f\13\16\13x\13\13\3\13\3\13\3\f\3\f\3\f\5\f\177\n\f\3"+
+		"\f\3\f\3\f\3\r\3\r\3\16\3\16\3\17\3\17\3\20\3\20\3\21\3\21\3\21\3\21\5"+
+		"\21\u0090\n\21\3\22\3\22\3\22\3\22\3\22\3\22\3\22\5\22\u0099\n\22\3\22"+
+		"\3\22\3\23\3\23\3\24\3\24\3\24\5\24\u00a2\n\24\3\25\3\25\3\25\3\25\3\25"+
+		"\3\25\3\26\3\26\3\27\3\27\3\30\3\30\3\30\3\30\2\2\31\2\4\6\b\n\f\16\20"+
+		"\22\24\26\30\32\34\36 \"$&(*,.\2\6\3\2\25\26\3\2\25\30\4\2\25\26\30\30"+
+		"\3\2\n\r\2\u00a7\2\61\3\2\2\2\48\3\2\2\2\6=\3\2\2\2\b@\3\2\2\2\nD\3\2"+
+		"\2\2\fF\3\2\2\2\16H\3\2\2\2\20P\3\2\2\2\22n\3\2\2\2\24p\3\2\2\2\26{\3"+
+		"\2\2\2\30\u0083\3\2\2\2\32\u0085\3\2\2\2\34\u0087\3\2\2\2\36\u0089\3\2"+
+		"\2\2 \u008f\3\2\2\2\"\u0091\3\2\2\2$\u009c\3\2\2\2&\u00a1\3\2\2\2(\u00a3"+
+		"\3\2\2\2*\u00a9\3\2\2\2,\u00ab\3\2\2\2.\u00ad\3\2\2\2\60\62\5\4\3\2\61"+
+		"\60\3\2\2\2\61\62\3\2\2\2\62\64\3\2\2\2\63\65\5\6\4\2\64\63\3\2\2\2\64"+
+		"\65\3\2\2\2\65\66\3\2\2\2\66\67\5\20\t\2\67\3\3\2\2\289\7\7\2\29;\5\b"+
+		"\5\2:<\5\16\b\2;:\3\2\2\2;<\3\2\2\2<\5\3\2\2\2=>\7\6\2\2>?\5.\30\2?\7"+
+		"\3\2\2\2@A\5\f\7\2AB\7\32\2\2BC\5\n\6\2C\t\3\2\2\2DE\t\2\2\2E\13\3\2\2"+
+		"\2FG\7\25\2\2G\r\3\2\2\2HI\7\25\2\2IJ\7%\2\2JM\7\25\2\2KL\7%\2\2LN\7\25"+
+		"\2\2MK\3\2\2\2MN\3\2\2\2N\17\3\2\2\2OQ\5\22\n\2PO\3\2\2\2QR\3\2\2\2RP"+
+		"\3\2\2\2RS\3\2\2\2S\21\3\2\2\2TU\7\36\2\2UV\7\33\2\2VW\7%\2\2W\\\5\24"+
+		"\13\2XY\7\16\2\2Y[\5\24\13\2ZX\3\2\2\2[^\3\2\2\2\\Z\3\2\2\2\\]\3\2\2\2"+
+		"]_\3\2\2\2^\\\3\2\2\2_`\7\37\2\2`o\3\2\2\2ab\7\36\2\2bc\7\33\2\2cd\7%"+
+		"\2\2di\5\22\n\2ef\7\16\2\2fh\5\22\n\2ge\3\2\2\2hk\3\2\2\2ig\3\2\2\2ij"+
+		"\3\2\2\2jl\3\2\2\2ki\3\2\2\2lm\7\37\2\2mo\3\2\2\2nT\3\2\2\2na\3\2\2\2"+
+		"o\23\3\2\2\2pq\7 \2\2qv\5\26\f\2rs\7$\2\2su\5\26\f\2tr\3\2\2\2ux\3\2\2"+
+		"\2vt\3\2\2\2vw\3\2\2\2wy\3\2\2\2xv\3\2\2\2yz\7!\2\2z\25\3\2\2\2{~\5\30"+
+		"\r\2|}\7$\2\2}\177\5\32\16\2~|\3\2\2\2~\177\3\2\2\2\177\u0080\3\2\2\2"+
+		"\u0080\u0081\7\3\2\2\u0081\u0082\5&\24\2\u0082\27\3\2\2\2\u0083\u0084"+
+		"\5 \21\2\u0084\31\3\2\2\2\u0085\u0086\5 \21\2\u0086\33\3\2\2\2\u0087\u0088"+
+		"\t\3\2\2\u0088\35\3\2\2\2\u0089\u008a\t\4\2\2\u008a\37\3\2\2\2\u008b\u008c"+
+		"\5\34\17\2\u008c\u008d\7\4\2\2\u008d\u0090\3\2\2\2\u008e\u0090\5\"\22"+
+		"\2\u008f\u008b\3\2\2\2\u008f\u008e\3\2\2\2\u0090!\3\2\2\2\u0091\u0092"+
+		"\7\36\2\2\u0092\u0093\5\34\17\2\u0093\u0094\7\4\2\2\u0094\u0095\7%\2\2"+
+		"\u0095\u0096\5\34\17\2\u0096\u0098\7\4\2\2\u0097\u0099\5$\23\2\u0098\u0097"+
+		"\3\2\2\2\u0098\u0099\3\2\2\2\u0099\u009a\3\2\2\2\u009a\u009b\7\37\2\2"+
+		"\u009b#\3\2\2\2\u009c\u009d\t\5\2\2\u009d%\3\2\2\2\u009e\u00a2\5.\30\2"+
+		"\u009f\u00a2\7\t\2\2\u00a0\u00a2\5(\25\2\u00a1\u009e\3\2\2\2\u00a1\u009f"+
+		"\3\2\2\2\u00a1\u00a0\3\2\2\2\u00a2\'\3\2\2\2\u00a3\u00a4\7\36\2\2\u00a4"+
+		"\u00a5\5*\26\2\u00a5\u00a6\7\b\2\2\u00a6\u00a7\5,\27\2\u00a7\u00a8\7\37"+
+		"\2\2\u00a8)\3\2\2\2\u00a9\u00aa\5.\30\2\u00aa+\3\2\2\2\u00ab\u00ac\5."+
+		"\30\2\u00ac-\3\2\2\2\u00ad\u00ae\5\36\20\2\u00ae\u00af\7\5\2\2\u00af/"+
+		"\3\2\2\2\17\61\64;MR\\inv~\u008f\u0098\u00a1";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

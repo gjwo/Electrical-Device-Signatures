@@ -64,6 +64,30 @@ public class ElecDevSigBaseListener implements ElecDevSigListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterYear(ElecDevSigParser.YearContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitYear(ElecDevSigParser.YearContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDay_of_month(ElecDevSigParser.Day_of_monthContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDay_of_month(ElecDevSigParser.Day_of_monthContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterTime_of_day(ElecDevSigParser.Time_of_dayContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -179,6 +203,30 @@ public class ElecDevSigBaseListener implements ElecDevSigListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitPower(ElecDevSigParser.PowerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPower_range(ElecDevSigParser.Power_rangeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPower_range(ElecDevSigParser.Power_rangeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterShape(ElecDevSigParser.ShapeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitShape(ElecDevSigParser.ShapeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

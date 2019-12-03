@@ -48,6 +48,26 @@ public interface ElecDevSigListener extends ParseTreeListener {
 	 */
 	void exitDate(ElecDevSigParser.DateContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ElecDevSigParser#year}.
+	 * @param ctx the parse tree
+	 */
+	void enterYear(ElecDevSigParser.YearContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ElecDevSigParser#year}.
+	 * @param ctx the parse tree
+	 */
+	void exitYear(ElecDevSigParser.YearContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ElecDevSigParser#day_of_month}.
+	 * @param ctx the parse tree
+	 */
+	void enterDay_of_month(ElecDevSigParser.Day_of_monthContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ElecDevSigParser#day_of_month}.
+	 * @param ctx the parse tree
+	 */
+	void exitDay_of_month(ElecDevSigParser.Day_of_monthContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ElecDevSigParser#time_of_day}.
 	 * @param ctx the parse tree
 	 */
@@ -147,6 +167,26 @@ public interface ElecDevSigListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitPower(ElecDevSigParser.PowerContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ElecDevSigParser#power_range}.
+	 * @param ctx the parse tree
+	 */
+	void enterPower_range(ElecDevSigParser.Power_rangeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ElecDevSigParser#power_range}.
+	 * @param ctx the parse tree
+	 */
+	void exitPower_range(ElecDevSigParser.Power_rangeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ElecDevSigParser#shape}.
+	 * @param ctx the parse tree
+	 */
+	void enterShape(ElecDevSigParser.ShapeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ElecDevSigParser#shape}.
+	 * @param ctx the parse tree
+	 */
+	void exitShape(ElecDevSigParser.ShapeContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ElecDevSigParser#time_period}.
 	 * @param ctx the parse tree
